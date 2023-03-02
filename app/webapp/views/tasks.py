@@ -1,7 +1,8 @@
 from datetime import datetime
 
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import TemplateView, RedirectView
+from django.views import View
+from django.views.generic import TemplateView
 
 from webapp.models import Task
 
@@ -16,9 +17,6 @@ class TaskDetail(TemplateView):
         context['tasks'] = get_object_or_404(Task, pk=kwargs['pk'])
         return context
 
-
-class IndexRedirectView(RedirectView):
-    pattern_name = 'index_page'
 
 class TaskUpdateView(TemplateView):
     template_name = 'task_update.html'
@@ -40,12 +38,9 @@ class TaskUpdateView(TemplateView):
         return render(request, 'task_update.html', context={'form': form, 'tasks': tasks})
 
 
-class TaskDelete(TemplateView):
-    template_name = 'index.html'
-
-    def get_context_data(self, **kwargs):
-        tasks = get_object_or_404(Task, pk=kwargs['pk'])
-        tasks.type.clear()
-        tasks.delete()
-
-
+class TaskDeleteView(View):
+    def get(self, request, pk):
+        task = get_object_or_404(Task, pk=pk)
+        task.type.clear()
+        task.delete()
+        return redirect('index_page')

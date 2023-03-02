@@ -2,6 +2,7 @@
 {% block title %}{{ article.title }}{% endblock %}
 {% block menu %}
     <li><a href="{% url 'task_update' tasks.pk %}">Update Task</a></li>
+    <li><a href="{% url 'delete' tasks.pk %}">Delete Task</a></li>
 {% endblock %}
 {% block content %}
     <h1 class="detail">Detail</h1>
