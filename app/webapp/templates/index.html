@@ -14,7 +14,7 @@
                 <div>{{ task_type }}</div>
         {% endfor %}
         <div>{{ task.created_at }}</div>
-        <p><a href="#">More...</a></p>
+        <p><a href="{% url 'detail_task' task.pk %}">More...</a></p>
         <hr/>
     {% endfor %}
 {% endblock %}
