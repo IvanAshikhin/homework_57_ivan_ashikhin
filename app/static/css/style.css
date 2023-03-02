@@ -74,6 +74,10 @@ hr {
 
 }
 
+.new_task{
+    margin-top: 70px;
+}
+
 .menu a {
     display: inline-block;
     text-decoration: none;

@@ -44,3 +44,17 @@ class TaskDeleteView(View):
         task.type.clear()
         task.delete()
         return redirect('index_page')
+
+
+class TaskAddView(View):
+    def get(self, request):
+        form = TaskForm()
+        return render(request, 'task_add.html', {'form': form})
+
+    def post(self, request):
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save()
+            task.save()
+            return redirect('detail_task', pk=task.pk)
+        return render(request, 'task_add.html', {'form': form})
