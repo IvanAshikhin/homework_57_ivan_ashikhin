@@ -1,0 +1,9 @@
+from django.urls import path
+
+from webapp.views.base import IndexView
+
+urlpatterns = [
+    path("", IndexView.as_view(), name="index_page"),
+    path("article/", IndexView.as_view()),
+
+]
